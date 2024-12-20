@@ -15,6 +15,6 @@ class UserModel(UserBaseModel):
 
 
 class LoginRequestModel(BaseModel):
-    username: Optional[str]
+    username: Optional[str] = None
     password: str
-    email: Optional[str]
+    email: Optional[str] = None
