@@ -1,10 +1,10 @@
 from datetime import timedelta
 from fastapi import HTTPException
-from models.util import TokenResponseModel
+from schemas.util import TokenResponseModel
 from auth_token import create_access_token
-from dependency import Session
+
 from db_models import User
-from models.user import LoginRequestModel, UserModel, UserBaseModel
+from schemas.user_schema import LoginRequestModel, UserModel, UserBaseModel
 from helper import sqlalchemy_to_pydantic, pydantic_to_sqlalchemy
 import bcrypt
 from env import ACCESS_TOKEN_EXPIRE_MINUTES

@@ -10,7 +10,7 @@ from controllers.user import (
     get_user_id,
     login_user,
 )
-from models.user import LoginRequestModel, UserModel
+from schemas.user_schema import LoginRequestModel, UserModel
 from sqlalchemy.orm import Session
 
 

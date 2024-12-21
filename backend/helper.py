@@ -2,10 +2,11 @@ from typing import TypeVar, Type
 from pydantic import BaseModel
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import Session
+from database import Base
 
 # Type variables for generic functions
 PydanticModel = TypeVar("PydanticModel", bound=BaseModel)
-SQLAlchemyModel = TypeVar("SQLAlchemyModel")
+SQLAlchemyModel = TypeVar("SQLAlchemyModel", bound=Base)
 
 
 # Pydantic -> SQLAlchemy Conversion
@@ -25,3 +26,10 @@ def sqlalchemy_to_pydantic(
         for col in sqlalchemy_obj.__table__.columns
     }
     return pydantic_model(**model_data)
+
+
+def commit_and_return(model: SQLAlchemyModel, db: Session) -> SQLAlchemyModel:
+    db.add(model)
+    db.commit()
+    db.refresh(model)
+    return model
